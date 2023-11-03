@@ -1,5 +1,4 @@
-import { useState } from "react";
-
+import { useState, useMemo } from "react";
 
 export default function App() {
   return (
@@ -13,8 +12,11 @@ function Counter() {
   const [count, setCount] = useState(0);
   const [step, setStep] = useState(1);
 
-  const date = new Date();
-  date.setDate(date.getDate() + count);
+  const date = useMemo(() => {
+    const currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() + count);
+    return currentDate;
+  }, [count]);
 
   return (
     <div>
